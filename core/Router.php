@@ -15,7 +15,17 @@ class Router
         ];
     }
 
-    public function dispatch(string $method, string $uri): void {}
+    public function notFound(): string
+    {
+        http_response_code(404);
+        return '404 Not Found';
+        exit;
+    }
+
+    public function dispatch(string $method, string $uri): void
+    {
+        $route = $this->findRoute($uri, $method);
+    }
 
     protected function findRoute(string $uri, string $method): ?array
     {
