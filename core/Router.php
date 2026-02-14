@@ -16,6 +16,15 @@ class Router
     {
         $routeSegments = explode('/', trim($routeUri, '/'));
         $requestSegments = explode('/', trim($requestUri, '/'));
+
+        if (count($routeSegments) !== count($requestSegments)) {
+            return null;
+        }
+        $params = [];
+        foreach ($routeSegments as $index => $routeSegment) {
+            if (str_starts_with($routeSegment,'{') && str_ends_with($routeSegment, '}')) {
+                $params[trim($routeSegment, '{}')] = $requestSegments[$index];
+            }
     }
 
     protected function callAction(string $controller, string $action, array $params): string
