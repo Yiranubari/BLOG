@@ -22,13 +22,14 @@ class Router
         exit;
     }
 
-    public function dispatch(string $method, string $uri): void
+    public function dispatch(string $uri, string $method): string
     {
         $route = $this->findRoute($uri, $method);
         if (!$route) {
-            echo $this->notFound();
-            return;
+            return $this->notFound();
         }
+        [$controller, $action] = explode('@', $route['controller']);
+        return $this->callAction($controller, $action, $route['params']);
     }
 
     protected function findRoute(string $uri, string $method): ?array
