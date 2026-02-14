@@ -14,5 +14,8 @@ class Router
 
     protected function matchRoute(string $routeUri, string $requestUri, string $requestUri): ?array {}
 
-    protected function callAction(string $controller, string $action, array $params): string {}
+    protected function callAction(string $controller, string $action, array $params): string
+    {
+        $controllerClass = "";
+    }
 }
