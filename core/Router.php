@@ -25,6 +25,10 @@ class Router
     public function dispatch(string $method, string $uri): void
     {
         $route = $this->findRoute($uri, $method);
+        if (!$route) {
+            echo $this->notFound();
+            return;
+        }
     }
 
     protected function findRoute(string $uri, string $method): ?array
